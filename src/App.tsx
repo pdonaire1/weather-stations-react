@@ -10,7 +10,15 @@ class App extends React.Component<{}> {
     return (
       <Provider weatherStore={this.weatherStore}>
         <div className="App">
-          <Weather />
+          <h1>Weather Journal</h1>
+          <div className="wrapper">
+            <div className="column">
+              <Weather />
+            </div>
+            <div className="column">
+              <h1>Weather Observations</h1>
+            </div>
+          </div>
         </div>
       </Provider>
     );

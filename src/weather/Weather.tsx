@@ -16,7 +16,7 @@ export class Weather extends React.Component<WeatherListProps> {
   }
   renderCoordinates = (coordinates:any) => {
     return (<div>
-      <h3>Coordinates:</h3>
+      <div className="sub-title">Coordinates:</div>
       {coordinates.n && <span>{coordinates.n} N°</span>}
       {coordinates.s && <span>{coordinates.s} S°</span>}
       {coordinates.e && <span>{coordinates.e} E°</span>}
@@ -27,13 +27,18 @@ export class Weather extends React.Component<WeatherListProps> {
     const { weatherList, error, loading } = this.props.weatherStore!;
     return (
       <div>
-        <h1>Weather Journal</h1>
+        <h1>Real Time Weather</h1>
         { error && <div>Error in Server, try refreshing the page</div> }
         { loading && <div>Loading...</div> }
+
         { loading === false && weatherList.map((data, i) => {
-          return (<div key={i} className="coordinates">
-            {this.renderCoordinates(data.coordinates)}
-            Wind Speed: {data.windSpeed}
+          return (<div key={i} className="card-box">
+            <div className="card">
+              <div className="container">
+                {this.renderCoordinates(data.coordinates)}
+                <div className="sub-title">Wind Speed:</div> {data.windSpeed}
+              </div>
+            </div>
 
           </div>) }) }
       </div>

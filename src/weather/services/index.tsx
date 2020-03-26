@@ -1,8 +1,8 @@
 export class WeatherService {
-  url:string = "https://localhost:8080/";
+  url:string = "http://localhost:8000/";
 
   requestWeather(): any {
-    return fetch(this.url, {
+    return fetch(this.url + "weather", {
       headers: {
         'Accept': 'application/json'
       },
