@@ -1,26 +1,21 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { Provider } from 'mobx-react'
+import { WeatherStore } from './weather/store/weather'
+import { Weather } from './weather/Weather';
+class App extends React.Component<{}> {
+  private weatherStore: WeatherStore = new WeatherStore()
+  render(){
+    return (
+      <Provider weatherStore={this.weatherStore}>
+        <div className="App">
+          <Weather />
+        </div>
+      </Provider>
+    );
+  }
 }
+
 
 export default App;
