@@ -10,15 +10,26 @@ export interface ICoordinates {
   w?: string
 }
 
+export interface IComment {
+  comment: string,
+  time?: string
+}
 export interface IWeather {
+  id: string,
+  city: string,
   coordinates: ICoordinates,
-  windSpeed: string
+  windSpeed: string,
+  comments?: IComment[]
 }
 
 export class WeatherStore {
-  weatherList: IWeather[] = []
+  @observable weatherList: IWeather[] = []
   @observable error: boolean = false
   @observable loading: boolean = false
+  journalPage: number = 1
+  @observable weatherJournal: IWeather[] = []
+  @observable errorJournal: boolean = false
+  @observable loadingJournal: boolean = false
   
   constructor(){
     this.weatherList = observable([]);
@@ -32,14 +43,52 @@ export class WeatherStore {
       const response = await client.requestWeather();
       this.weatherList = response.map( (data: any) => {
         return {
+          id: data.id,
+          city: data.city,
           coordinates: data.coordinates,
-          windSpeed: data.wind_speed
+          windSpeed: data.wind_speed,
+          comments: data.comments
         }});
     } catch (error) {
       this.error = true;
       this.weatherList = [];
     }
     this.loading = false
+  }
+
+  @action
+  requestWeatherJournal = async () => {
+    this.errorJournal = false;
+    this.loadingJournal = true;
+    try {
+      const response = await client.requestWeatherJournal(this.journalPage);
+      console.log("response:", response);
+      this.weatherJournal = response.results.map( (data: any) => {
+        return {
+          id: data.id,
+          city: data.city,
+          coordinates: data.coordinates,
+          windSpeed: data.wind_speed,
+          comments: data.comments
+        }});
+    } catch (error) {
+      this.errorJournal = true;
+      this.weatherJournal = [];
+    }
+    this.loadingJournal = false
+  }
+
+  @action
+  createObservation = async (id: string, observation: string) => {
+    try {
+      const response = await client.createObservation(id, observation);
+      const index = this.weatherList.findIndex((weather) => weather.id === id);
+      this.weatherList[index] = {
+        ...this.weatherList[index],
+        comments: this.weatherList[index].comments ? [response].concat(this.weatherList[index].comments) : [response]}
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
 

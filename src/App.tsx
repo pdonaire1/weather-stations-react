@@ -4,6 +4,7 @@ import './App.css';
 import { Provider } from 'mobx-react'
 import { WeatherStore } from './weather/store/weather'
 import { Weather } from './weather/Weather';
+import { WeatherJournal } from './weather/WeatherJournal';
 class App extends React.Component<{}> {
   private weatherStore: WeatherStore = new WeatherStore()
   render(){
@@ -16,7 +17,7 @@ class App extends React.Component<{}> {
               <Weather />
             </div>
             <div className="column">
-              <h1>Weather Observations</h1>
+              <WeatherJournal />
             </div>
           </div>
         </div>

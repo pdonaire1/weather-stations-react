@@ -20,12 +20,36 @@ h1 {
   padding: 1%;
 }
 .column {
-  flex-grow: 1
+  flex-grow: 1;
+  width: 50%;
 }
 
 .sub-title {
   display: inline;
   font-weight: bold;
+  color: #71819b;
+}
+
+.comments {
+  width: 90%;
+  border: none;
+}
+.comment-box {
+  padding: 3px;
+}
+.comment-box > div{
+  padding: 3px;
+  background: #e6edf8;
+  border-radius: 30px;
+}
+
+button {
+  background: #7e98d3;
+  color: white;
+  border-radius: 7px;
+  font-weight: bold;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 /* Card styles obtined by w3schools and edited by @pdonaire1 */
@@ -49,4 +73,3 @@ h1 {
 .card > .container {
   padding: 10px;
 }
-
