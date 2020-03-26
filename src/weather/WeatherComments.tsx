@@ -19,7 +19,7 @@ export class WeatherComments extends React.Component<IWeatherListProps> {
         { weather.comments && weather.comments!.map((comment, index) => <div key={index} className="comment-box">
           <div>
             {comment.comment}
-            <div>Date: {comment.time}</div>
+            <div>Date: {comment.time && comment.time.split("T")[0]}</div>
           </div>
         </div>)}
       </div>

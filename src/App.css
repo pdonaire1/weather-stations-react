@@ -40,7 +40,8 @@ h1 {
 .comment-box > div{
   padding: 3px;
   background: #e6edf8;
-  border-radius: 30px;
+  border-radius: 16px;
+  color: #566379;
 }
 
 button {
@@ -51,10 +52,17 @@ button {
   padding-right: 10px;
   padding-left: 10px;
 }
+button.disabled {
+  background: #eff5ff;
+  color: #7e98d3;
+}
 
 /* Card styles obtined by w3schools and edited by @pdonaire1 */
 .card-box {
   padding: 1%;
+  align-items: center;
+  margin: auto;
+  margin-left: 15%;
 }
 .card {
   /* Add shadows to create the "card" effect */

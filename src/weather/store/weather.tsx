@@ -26,7 +26,8 @@ export class WeatherStore {
   @observable weatherList: IWeather[] = []
   @observable error: boolean = false
   @observable loading: boolean = false
-  journalPage: number = 1
+  @observable journalPage: number = 1
+  @observable journalPages: number = 1
   @observable weatherJournal: IWeather[] = []
   @observable errorJournal: boolean = false
   @observable loadingJournal: boolean = false
@@ -57,12 +58,18 @@ export class WeatherStore {
   }
 
   @action
+  changePage = (page:number) => {
+    this.journalPage = page;
+    this.requestWeatherJournal();
+  }
+
+  @action
   requestWeatherJournal = async () => {
     this.errorJournal = false;
     this.loadingJournal = true;
     try {
       const response = await client.requestWeatherJournal(this.journalPage);
-      console.log("response:", response);
+      this.journalPages = response.count;
       this.weatherJournal = response.results.map( (data: any) => {
         return {
           id: data.id,
