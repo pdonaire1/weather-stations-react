@@ -19,6 +19,7 @@ export class Weather extends React.Component<WeatherListProps> {
 
   render() {
     const { weatherList, error, loading } = this.props.weatherStore!;
+    console.log("weatherList:::::::", weatherList)
     return (
       <div>
         <h1>Real Time Weather</h1>

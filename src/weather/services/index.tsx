@@ -1,6 +1,6 @@
 
 export class WeatherService {
-  url:string = "https://weather-stations-api.herokuapp.com/";
+  url:string = "http://localhost:8000/";
 
   requestWeather(): any {
     return fetch(this.url + "weather", {
